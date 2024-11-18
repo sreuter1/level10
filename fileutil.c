@@ -23,7 +23,7 @@ char ** loadFileAA(char *filename, int *size)
 	// declare capacity and size variables
 	int capacity = 10;
 	int mySize = 0; // how full the array of strings is
-	char * str;
+	char str[1000];
 
 	// Allocate memory for an array of strings (arr).
 	char ** arr = malloc(capacity * sizeof(char *)); // pointer to the array of strings that holds size char pointers
@@ -31,18 +31,18 @@ char ** loadFileAA(char *filename, int *size)
 	// Read the file line by line.
 	while (fgets(str, 1000, in)) // puts each line of the in file into the str variable
 	{
-
-    //   Trim newline from the fgets function
+    
+	//   Trim newline from the fgets function
 		for (int i = 0 ; i < strlen(str) ; i++)
 		{
-			if (*arr[mySize] == '\n')
+			if (str[i] == '\n')
 			{
-				*arr[mySize] = '\0';
+				str[i] = '\0';
 			}
 		}
 
 	//   Expand array if necessary (realloc).
-	if (mySize > capacity)
+	if (mySize > capacity) // don't know if the resizing works!!
 	{
 		capacity = capacity * 2;
 		arr = realloc(arr, capacity * sizeof(char *));
@@ -74,12 +74,25 @@ char ** loadFileAA(char *filename, int *size)
 // Return the found string or NULL if not found.
 char * substringSearchAA(char *target, char **lines, int size)
 {
-
+	for(int i = 0; i < size; i++)
+	{
+		// use strstr to check if the target is there
+		if (strstr(lines[i], target))
+		{
+			return lines[i];
+		}
+	}
 	return NULL;
 }
 
 // Free the memory used by the array
 void freeAA(char ** arr, int size)
 {
-
+	for (int i = 0; i < size; i++)
+	{
+		//free the strings
+		free(arr[i]);
+	}
+	// free the array
+	free(arr);
 }
