@@ -49,6 +49,7 @@ char ** loadFileAA(char *filename, int *size)
 	}
 
 	//   Allocate memory for the string (str).
+	printf(" %lu", strlen(str));
 	arr[mySize] = malloc(strlen(str));
 
 
@@ -57,7 +58,6 @@ char ** loadFileAA(char *filename, int *size)
 	mySize++; // incrementing the count
 
 	//   Attach the string to the large array (assignment =).
-
 	}
 
     // Close the file.
