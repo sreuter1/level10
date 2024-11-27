@@ -42,15 +42,14 @@ char ** loadFileAA(char *filename, int *size)
 		}
 
 	//   Expand array if necessary (realloc).
-	if (mySize > capacity) // don't know if the resizing works!!
+	if (mySize >= capacity) // don't know if the resizing works!!
 	{
 		capacity = capacity * 2;
 		arr = realloc(arr, capacity * sizeof(char *));
 	}
 
 	//   Allocate memory for the string (str).
-	printf(" %lu", strlen(str));
-	arr[mySize] = malloc(strlen(str));
+	arr[mySize] = malloc(strlen(str) + 1);
 
 
 	//   Copy each line into the string (use strcpy).
